@@ -1,7 +1,8 @@
 """Handles the Pazzak player logic."""
 
 from random import randint
-from game_logic.cards import Card, SideDeck
+from game_logic.cards import SideDeck
+
 
 class Hand(object):
     """Represents a player's hand in a Pazaak match."""

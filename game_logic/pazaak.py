@@ -4,6 +4,7 @@ from time import sleep
 from game_logic.round import Round
 from game_logic.player import Player
 
+
 class Match(object):
     """Represents a Pazaak match between two players."""
 
