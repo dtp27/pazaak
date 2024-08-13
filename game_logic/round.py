@@ -21,7 +21,7 @@ class Round(object):
 
         # Allows player to make certain moves during the turn
         while player.get_score() < 20:
-            print(player.name, ", please choose a move {end turn (E) | play hand (H) | stand (S)}")
+            print(f"{player.name}, please choose a move {{end turn (E) | play hand (H) | stand (S)}}")
             turn_choice = input("> ")
 
             # convert short hand to full choice for clarity
@@ -36,10 +36,13 @@ class Round(object):
             # and must be one of the four cards in the player's hand
             if turn_choice == "play hand":
                 if not hand_played:
-                    card_value = player.play_card()
-                    player.add_card(Card(card_value))
-                    player.show_table()
-                    hand_played = True
+                    if len(player.hand.cards) == 0:
+                        print("You are out of hand cards.")
+                    else:
+                        card_value = player.play_card()
+                        player.add_card(Card(card_value))
+                        player.show_table()
+                        hand_played = True
                 else:
                     print("Only one hand card per turn can be played.")
             elif turn_choice in ["end turn", "stand"]: 
@@ -78,7 +81,7 @@ class Round(object):
         """Handles all logic for a single round for the players."""
         turn_choice = "end turn"
         while not (player1.round_ended and player2.round_ended):
-            
+
             for player in [player1, player2]:
                 # player can play as long as their turn
                 if not player.round_ended:

@@ -7,7 +7,7 @@ from game_logic.player import Player
 class Match(object):
     """Represents a Pazaak match between two players."""
 
-    def __init__(self, player1_name, player2_name="Computer"):
+    def __init__(self, player1_name, player2_name):
         self.player1 = Player(player1_name)
         self.player2 = Player(player2_name)
 

@@ -1,7 +1,7 @@
 """Handles the Pazzak player logic."""
 
 from random import randint
-from game_logic.cards import SideDeck
+from game_logic.cards import Card, SideDeck
 
 class Hand(object):
     """Represents a player's hand in a Pazaak match."""
@@ -12,7 +12,7 @@ class Hand(object):
         for i in range(0,4):
             random_draw_index = randint(0, len(side_deck.cards)-1)
             hand_card = side_deck.cards.pop(random_draw_index)
-            self.cards.append(hand_card)
+            self.cards.append(Card(1))
     
     def remove_card(self, card):
         """Handles removing a card from the player's hand."""
@@ -61,7 +61,10 @@ class Player(object):
         hand_choices = [card.value for card in self.hand.cards]
         while card_choice not in hand_choices:
             try:
+                print("\nEnter the hand card you wish to play.")
                 card_choice = int(input("> "))
+                if card_choice not in hand_choices:
+                    print("You don't have that card in your hand.") 
             except:
                 print("Enter a valid card value.")
 
