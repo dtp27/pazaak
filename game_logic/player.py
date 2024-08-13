@@ -28,6 +28,7 @@ class Player(object):
         self.hand = Hand(self.side_deck)
         self.rounds_won = 0
         self.cards = []
+        self.round_ended = False
 
     def add_card(self, card):
         """Handles adding a card to the table for the player."""
@@ -70,3 +71,8 @@ class Player(object):
                 self.hand.remove_card(card)
                 
         return int(card_choice)
+    
+    def reset(self):
+        """Handles resetting player settings after each round."""
+        self.cards = []
+        self.round_ended = False

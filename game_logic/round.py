@@ -55,34 +55,9 @@ class Round(object):
                 return turn_choice
         except:
             return "stand"
-        
-    def play_round(self, player1, player2):
-        """Handles all logic for a single round for the players."""
-        turn_choice = "end turn"
-        player1_round_ended = False
-        player2_round_ended = False
-        while True:
 
-            # player can play as long as their turn
-            if not player1_round_ended:
-                turn_choice = self.play_turn(player1)
-                if turn_choice == "stand":
-                    player1_round_ended = True
-                    # if one player busts, the round ends
-                    if player1.get_score() > 20:
-                        player2_round_ended = True
-
-            # same exact turn logic for player 2 as player 1
-            if not player2_round_ended:
-                turn_choice = self.play_turn(player2)
-                if turn_choice == "stand":
-                    player2_round_ended = True
-                    if player2.get_score() > 20:
-                        player1_round_ended = True
-
-            if player1_round_ended and player2_round_ended:
-                break
-    
+    def get_winner(self, player1, player2):
+        """Determines which player won the round."""
         # Evaluate and return who won the round
         if player1.get_score() > 20:
             player2.rounds_won += 1
@@ -98,3 +73,20 @@ class Round(object):
             return player1
         else:
             return None
+
+    def play_round(self, player1, player2):
+        """Handles all logic for a single round for the players."""
+        turn_choice = "end turn"
+        while not (player1.round_ended and player2.round_ended):
+            
+            for player in [player1, player2]:
+                # player can play as long as their turn
+                if not player.round_ended:
+                    turn_choice = self.play_turn(player)
+                    if turn_choice == "stand":
+                        player.round_ended = True
+                        # if one player busts, the round ends
+                        if player.get_score() > 20:
+                            return self.get_winner(player1, player2)
+                        
+        return self.get_winner(player1, player2)

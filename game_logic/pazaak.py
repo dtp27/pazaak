@@ -37,7 +37,7 @@ class Match(object):
     def play(self):
         """Handles the match logic."""
         round_num = 0
-        while not (winner := self.check_winner()):
+        while True:
             self.show_match_score()
             round_num += 1
             print(f"\n\nRound {round_num} starting...\n\n")
@@ -46,9 +46,9 @@ class Match(object):
             match_round = Round()
             winner = match_round.play_round(self.player1, self.player2)
             
-            # Clear the table after each round
-            self.player1.cards = []
-            self.player2.cards = []
+            # Reset player settings after each round
+            self.player1.reset()
+            self.player2.reset()
 
             if winner:
                 print(f"\n{winner.name} wins the round.\n")
@@ -56,6 +56,10 @@ class Match(object):
                 print("\nIt's a tie!\n")
             # Allow user to read before moving to next round
             sleep(2)
+
+            # check if a player has won the Pazaak match
+            if winner := self.check_winner():
+                break
         
         self.finish_game(winner)
         
