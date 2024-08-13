@@ -14,8 +14,8 @@ wins the match.
 During each of their turns, players have the following options:
     - End their turn: a player will draw a card at the start of their next turn.
     - Play a card from their hand. A player's hand consists of four cards randomly 
-        drawn from their side deck at the beginning of the match. These four cards 
-        must last all rounds of the match, so players have to play them carefully.
+        drawn from their side deck at the beginning of the match. Hand cards are 
+        not replenished at the end of the round, so players have to play them carefully.
     - Stand. This ends the round for the player at their current score.
 
 A round ends when either both players stand or one player busts. If a player 

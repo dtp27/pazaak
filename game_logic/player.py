@@ -12,7 +12,7 @@ class Hand(object):
         for i in range(0,4):
             random_draw_index = randint(0, len(side_deck.cards)-1)
             hand_card = side_deck.cards.pop(random_draw_index)
-            self.cards.append(Card(1))
+            self.cards.append(hand_card)
     
     def remove_card(self, card):
         """Handles removing a card from the player's hand."""
@@ -45,11 +45,11 @@ class Player(object):
     def show_table(self):
         """Shows player's side of the Pazaak table."""
         print("---------------------------")
-        print("Cards:", end=' ')
+        print("Active Cards:", end=' ')
         for card in self.cards:
             print(card.value, end=' ')
-        print("\nCurrent Card Sum:", self.get_score())
-        print("Cards Available:", end=' ')
+        print("\nActive Card Total:", self.get_score())
+        print("Cards in Hand:", end=' ')
         for card in self.hand.cards:
             print(card.value, end=' ')
         print("\n---------------------------")
@@ -69,9 +69,11 @@ class Player(object):
                 print("Enter a valid card value.")
 
         # remove the card from the hand
+        # need to stop after first occurance to avoid removing more than one card
         for card in self.hand.cards:
             if card.value == card_choice:
                 self.hand.remove_card(card)
+                break
                 
         return int(card_choice)
     
